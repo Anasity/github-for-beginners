@@ -17,7 +17,7 @@ def func_caesar_eu(message, step):
             result += chr((ord(char) + step - 97) % 26 + 97) 
     return result 
     
-message = input("Сообщение для ДЕшифровки: ").upper() 
+message = input("Сообщение: ").upper() 
 step = int(input('Шаг шифровки: '))  
 lang = input('Выберите язык RU/EU: ')
 
