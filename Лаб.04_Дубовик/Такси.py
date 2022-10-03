@@ -1,40 +1,4 @@
-def Sort_Tax(A):
-    j = len(A) - 1
-    flag = True
-    while flag:
-        flag = False
-        for i in range(0, j):
-            if A[i] > A[i + 1]:
-                A[i], A[i + 1] = A[i + 1], A[i]
-                flag = True
-        j -= 1
-
-def Sort_Dist(A):
-    j = len(A) - 1
-    flag = True
-    while flag:
-        flag = False
-        for i in range(0, j):
-            if A[i] < A[i + 1]:
-                A[i], A[i + 1] = A[i + 1], A[i]
-                flag = True
-        j -= 1
-
-n=int(input("Введите число сотруднииков (от 1 до 1000): "))
-dist=list(map(int, input("Введите расстояния в км от работы до домов сотрудников : ").split()))
-tax=list(map(int, input("Введите тарифы в рублях за проезд одного км в такси: ").split()))
-for i in range(n):
-    tax[i]= (tax[i], i)
-for i in range(n):
-    dist[i]= (dist[i], i)
- 
-Sort_Tax(tax)
-Sort_Dist(dist)
-
-sum_itog=0
-for line in range(n):
-    sum=tax[line][0]*dist[line][0]
-    sum_itog=sum_itog+sum
+def Word_Sum(ws):
     a = ["один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять"]
     b = ["одна", "две", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять"]
     c = ["одиннадцать", "двенадцать", "тринадцать", "четырнадцать", "пятнадцать", "шестнадцать", "семнадцать", "восемнадцать", "девятнадцать"]
@@ -42,12 +6,12 @@ for line in range(n):
     e = ["сто", "двести", "триста", "четыреста", "пятьсот", "шестьсот", "семьсот", "восемьсот", "девятьсот"]
     f = ["тысяча", "тысячи", "тысяч"]
     g = ["рубль", "рубля", "рублей"]
-    n1 = sum // 100000
-    n2 = (sum // 10000) % 10
-    n3 = (sum // 1000) % 10
-    n4 = (sum // 100) % 10
-    n5 = (sum // 10) % 10
-    n6 = sum % 10
+    n1 = ws // 100000
+    n2 = (ws // 10000) % 10
+    n3 = (ws // 1000) % 10
+    n4 = (ws // 100) % 10
+    n5 = (ws // 10) % 10
+    n6 = ws % 10
     chg = ""
     if n1 != 0:
         i1 = n1 - 1
@@ -101,6 +65,48 @@ for line in range(n):
     if (n6 == 0) and (n5 or n4 or n3 or n2 or n1 !=0):
         chg += g[2]
     chg = chg.capitalize()
-    print  ("сотрудник ", dist[line][1]+1,", машина ", tax[line][1]+1, ". сумма поездки :", sum, chg)
-print ("Общая сумма: ", sum_itog)
+    return chg
+
+def Sort_Tax(A):
+    j = len(A) - 1
+    flag = True
+    while flag:
+        flag = False
+        for i in range(0, j):
+            if A[i] > A[i + 1]:
+                A[i], A[i + 1] = A[i + 1], A[i]
+                flag = True
+        j -= 1
+
+def Sort_Dist(A):
+    j = len(A) - 1
+    flag = True
+    while flag:
+        flag = False
+        for i in range(0, j):
+            if A[i] < A[i + 1]:
+                A[i], A[i + 1] = A[i + 1], A[i]
+                flag = True
+        j -= 1
+
+n=int(input("Введите число сотруднииков (от 1 до 1000): "))
+dist=list(map(int, input("Введите расстояния в км от работы до домов сотрудников : ").split()))
+tax=list(map(int, input("Введите тарифы в рублях за проезд одного км в такси: ").split()))
+for i in range(n):
+    tax[i]= (tax[i], i)
+for i in range(n):
+    dist[i]= (dist[i], i)
+ 
+Sort_Tax(tax)
+Sort_Dist(dist)
+trip= [[]]*n
+sum_itog=0
+for line in range(n):
+    sum=tax[line][0]*dist[line][0]
+    sum_itog=sum_itog+sum
+    trip[line]=dist[line][1]+1, tax[line][1]+1, sum
+Sort_Tax(trip)   
+for str in range(n):
+    print  ("Cотрудник ", trip[str][0],", машина ", trip[str][1], ". Cумма поездки: ", trip[str][2], " (", Word_Sum(trip[str][2]), ")")
+print ("Общая сумма: ", sum_itog, " (", Word_Sum(sum_itog), ")")
 
