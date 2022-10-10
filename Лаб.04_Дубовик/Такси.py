@@ -1,3 +1,27 @@
+def To_Number(tn):
+    try:
+        tn = int(tn)
+        if 1<=tn<=1000:
+            return tn
+        else:
+            print("ОШИБКА: Вы ввели число не от 1 до 1000")
+            return 'False'
+    except:
+        print("ОШИБКА: Вы ввели не число")
+        return 'False'
+        
+def To_Number_All(tna, n):
+    try:
+        if len(tna)==n:
+            tna=list(map(int, tna))
+            return tna
+        else:
+            print("ОШИБКА: Вы ввели не", n, "объектов")
+            return 'False'
+    except:
+        print("ОШИБКА: Вы ввели не число")
+        return 'False'
+
 def Word_Sum(ws):
     a = ["один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять"]
     b = ["одна", "две", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять"]
@@ -89,9 +113,21 @@ def Sort_Dist(A):
                 flag = True
         j -= 1
 
-n=int(input("Введите число сотруднииков (от 1 до 1000): "))
-dist=list(map(int, input("Введите расстояния в км от работы до домов сотрудников : ").split()))
-tax=list(map(int, input("Введите тарифы в рублях за проезд одного км в такси: ").split()))
+n=input("Введите число сотруднииков (от 1 до 1000): ")
+while To_Number(n) == 'False':
+    n=input("Введите число сотруднииков (от 1 до 1000): ")
+n=To_Number(n)
+
+dist=list(input("Введите расстояния в км от работы до домов сотрудников : ").split())
+while To_Number_All(dist,n) == 'False':
+    dist=list(input("Введите расстояния в км от работы до домов сотрудников : ").split())
+dist=To_Number_All(dist,n)
+
+tax=list(input("Введите тарифы в рублях за проезд одного км в такси: ").split())
+while To_Number_All(tax,n) == 'False':
+    tax=list(input("Введите тарифы в рублях за проезд одного км в такси: ").split())
+tax=To_Number_All(tax,n)
+
 for i in range(n):
     tax[i]= (tax[i], i)
 for i in range(n):
@@ -109,4 +145,3 @@ Sort_Tax(trip)
 for str in range(n):
     print  ("Cотрудник ", trip[str][0],", машина ", trip[str][1], ". Cумма поездки: ", trip[str][2], " (", Word_Sum(trip[str][2]), ")")
 print ("Общая сумма: ", sum_itog, " (", Word_Sum(sum_itog), ")")
-
