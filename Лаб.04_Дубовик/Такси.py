@@ -1,31 +1,34 @@
-def To_Number(tn):
-    try:
-        tn = int(tn)
-        if 1<=tn<=1000:
-            return tn
+def To_Number(tn): #объявление функции, проверяющей ввод только цифр
+    try: #если в данном блоке возникает ошибка, то вызывается блок except
+        tn = int(tn) #преобразование в целое число
+        if 1 <= tn <= 1000:
+            return tn #функция, возвращающая значение tn
         else:
             print("ОШИБКА: Вы ввели число не от 1 до 1000")
-            return 'False'
-    except:
+            return 'False' #функция возвращает False
+    except: #обработка ошибки
         print("ОШИБКА: Вы ввели не число")
-        return 'False'
-        
+        return 'False' #функция возвращает False
+
+
 def To_Number_All(tna, n):
-    try:
-        if len(tna)==n:
-            tna=list(map(int, tna))
-            return tna
+    try: #если в данном блоке возникает ошибка, то вызывается блок except
+        if len(tna) == n:
+            tna = list(map(int, tna))
+            return tna #функция, возвращающая значение tna
         else:
             print("ОШИБКА: Вы ввели не", n, "объектов")
             return 'False'
-    except:
+    except:  #обработка ошибки
         print("ОШИБКА: Вы ввели не число")
-        return 'False'
+        return 'False' #функция возвращает False
+
 
 def Word_Sum(ws):
     a = ["один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять"]
     b = ["одна", "две", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять"]
-    c = ["одиннадцать", "двенадцать", "тринадцать", "четырнадцать", "пятнадцать", "шестнадцать", "семнадцать", "восемнадцать", "девятнадцать"]
+    c = ["одиннадцать", "двенадцать", "тринадцать", "четырнадцать", "пятнадцать", "шестнадцать", "семнадцать",
+         "восемнадцать", "девятнадцать"]
     d = ["десять", "двадцать", "тридцать", "сорок", "пятьдесят", "шестьдесят", "семьдесят", "восемьдесят", "девяносто"]
     e = ["сто", "двести", "триста", "четыреста", "пятьсот", "шестьсот", "семьсот", "восемьсот", "девятьсот"]
     f = ["тысяча", "тысячи", "тысяч"]
@@ -36,12 +39,12 @@ def Word_Sum(ws):
     n4 = (ws // 100) % 10
     n5 = (ws // 10) % 10
     n6 = ws % 10
-    chg = ""
+    chg = "" #объявление строки
     if n1 != 0:
         i1 = n1 - 1
         chg += e[i1] + " "
     if n2 == 1 and n3 == 0:
-        chg += d[0] + " "
+        chg += d[0] + " " #если надо вывести "десять"
     if n2 != 1:
         if n2 != 0:
             i2 = n2 - 1
@@ -54,21 +57,21 @@ def Word_Sum(ws):
             i3 = n3 - 1
             chg += b[i3] + " "
             if n3 == 1:
-                chg += f[0] + " "
+                chg += f[0] + " " #если надо вывести "тысяча"
             elif 1 < n3 < 5:
-                chg += f[1] + " "
+                chg += f[1] + " " #если надо вывести "тысячи"
             else:
-                chg += f[2] + " "
+                chg += f[2] + " " #если надо вывести "тысяч"
     if (n3 == 0) and (n2 or n1 != 0):
         chg += f[2] + " "
-    
+
     if n4 != 0:
         i4 = n4 - 1
         chg += e[i4] + " "
-    
+
     if n5 == 1 and n6 == 0:
         chg += d[0] + " "
-    
+
     if n5 != 1:
         if n5 != 0:
             i5 = n5 - 1
@@ -81,17 +84,18 @@ def Word_Sum(ws):
             i6 = n6 - 1
             chg += a[i6] + " "
             if n6 == 1:
-                chg += g[0] + " "
+                chg += g[0] + " " #если надо вывести "рубль"
             elif 1 < n6 < 5:
-                chg += g[1] + " "
+                chg += g[1] + " " #если надо вывести "рубля"
             else:
-                chg += g[2] + " "
-    if (n6 == 0) and (n5 or n4 or n3 or n2 or n1 !=0):
+                chg += g[2] + " " #если надо вывести "рублей"
+    if (n6 == 0) and (n5 or n4 or n3 or n2 or n1 != 0):
         chg += g[2]
-    chg = chg.capitalize()
+    chg = chg.capitalize() #Метод возвращает строку с первым символом в верхнем регистре
     return chg
 
-def Sort_Tax(A):
+
+def Sort_Tax(A): #объявление функции, сортировка номеров такси по возрастанию
     j = len(A) - 1
     flag = True
     while flag:
@@ -102,7 +106,8 @@ def Sort_Tax(A):
                 flag = True
         j -= 1
 
-def Sort_Dist(A):
+
+def Sort_Dist(A): #объявление функции, сортировка расстояний по возрастанию
     j = len(A) - 1
     flag = True
     while flag:
@@ -113,35 +118,37 @@ def Sort_Dist(A):
                 flag = True
         j -= 1
 
-n=input("Введите число сотруднииков (от 1 до 1000): ")
+
+n = input("Введите число сотруднииков (от 1 до 1000): ") #Ввод списка сотрудников
 while To_Number(n) == 'False':
-    n=input("Введите число сотруднииков (от 1 до 1000): ")
-n=To_Number(n)
+    n = input("Введите число сотруднииков (от 1 до 1000): ")
+n = To_Number(n)
 
-dist=list(input("Введите расстояния в км от работы до домов сотрудников : ").split())
-while To_Number_All(dist,n) == 'False':
-    dist=list(input("Введите расстояния в км от работы до домов сотрудников : ").split())
-dist=To_Number_All(dist,n)
+dist = list(input("Введите расстояния в км от работы до домов сотрудников : ").split()) #ввод списка расстояний
+while To_Number_All(dist, n) == 'False': #пока выдаётся ошибка,повторяет ввод списка расстояний
+    dist = list(input("Введите расстояния в км от работы до домов сотрудников : ").split())
+dist = To_Number_All(dist, n)
 
-tax=list(input("Введите тарифы в рублях за проезд одного км в такси: ").split())
-while To_Number_All(tax,n) == 'False':
-    tax=list(input("Введите тарифы в рублях за проезд одного км в такси: ").split())
-tax=To_Number_All(tax,n)
+tax = list(input("Введите тарифы в рублях за проезд одного км в такси: ").split()) #ввод списка тарифов
+while To_Number_All(tax, n) == 'False': #пока выдаётся ошибка,повторяет ввод списка тарифов
+    tax = list(input("Введите тарифы в рублях за проезд одного км в такси: ").split())
+tax = To_Number_All(tax, n)
 
+for i in range(n): #цикл генерирует числа в диапазоне от i=0 до n
+    tax[i] = (tax[i], i)
 for i in range(n):
-    tax[i]= (tax[i], i)
-for i in range(n):
-    dist[i]= (dist[i], i)
- 
+    dist[i] = (dist[i], i)
+
 Sort_Tax(tax)
 Sort_Dist(dist)
-trip= [[]]*n
-sum_itog=0
+trip = [[]] * n
+sum_itog = 0
 for line in range(n):
-    sum=tax[line][0]*dist[line][0]
-    sum_itog=sum_itog+sum
-    trip[line]=dist[line][1]+1, tax[line][1]+1, sum
-Sort_Tax(trip)   
+    sum = tax[line][0] * dist[line][0]
+    sum_itog = sum_itog + sum
+    trip[line] = dist[line][1] + 1, tax[line][1] + 1, sum
+Sort_Tax(trip)
 for str in range(n):
-    print  ("Cотрудник ", trip[str][0],", машина ", trip[str][1], ". Cумма поездки: ", trip[str][2], " (", Word_Sum(trip[str][2]), ")")
-print ("Общая сумма: ", sum_itog, " (", Word_Sum(sum_itog), ")")
+    print("Cотрудник ", trip[str][0], ", машина ", trip[str][1], ". Cумма поездки: ", trip[str][2], " (",
+          Word_Sum(trip[str][2]), ")")
+print("Общая сумма: ", sum_itog, " (", Word_Sum(sum_itog), ")") #вывод итоговой суммы цифрами и словами
