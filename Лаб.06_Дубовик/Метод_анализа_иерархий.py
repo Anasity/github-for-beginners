@@ -36,11 +36,11 @@ def table_sum(table, n):#объявление функции для суммир
             sum += table[i][j]
     return sum
 def count_wq (table,n,sum): #объявление функции для расчёта весовых коэффициентов
-    column_sum = 0
     array_wq  = list()
     #расчёт суммы отношений для каждого критерия
-    for i in range(n):
-        for j in range(n):
+    for j in range(n):
+        column_sum = 0
+        for i in range(n):
             column_sum += table[j][i]
         array_wq.append(column_sum/sum)
     return array_wq
@@ -64,4 +64,3 @@ wq.reverse()
 print("Весовые коэффициенты:", end=" ")
 for elem in wq:
     print("{0:.2f}".format(elem), end=" ") #форматирование вывода
-
