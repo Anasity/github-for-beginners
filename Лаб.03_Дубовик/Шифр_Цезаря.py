@@ -65,3 +65,4 @@ elif lang == 'EU':
     print("Резултат: " + func_caesar_eu(message, step))
 else:
     print("Неверно выбран язык")
+    
